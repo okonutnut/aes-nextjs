@@ -1,12 +1,40 @@
 'use client'
 import { useForm } from "react-hook-form"
+import axios from 'axios'
+import { useState, useEffect, use } from "react";
+
 const EnrollmentForm = () => {
 
-  const { register, control, handleSubmit } = useForm();
+  const { register, handleSubmit } = useForm();
+
+  const GenderOptions = [
+    { value: "Male", label: "Male" },
+    { value: "Female", label: "Female" }
+  ];
+
+  // Getting the year and sections
+  const [yearSection, setYearSection] = useState([]);
+  useEffect(() => {
+    axios.get('/api/year_section')
+      .then(response => {
+        const dataArray = response.data.map(item => {
+          return {
+            value: `${item.year_level} - ${item.section_name}`,
+            label: `${item.year_level} - ${item.section_name}`
+          }
+        });
+        console.log(dataArray);
+        setYearSection(dataArray);
+      })
+      .catch(error => {
+        console.log(error)
+      })
+  }, [])
 
   const onSubmit = (data) => {
     console.log(data)
   }
+  
   return (
     <>
       <div className="card lg:card-side bg-base-100">
@@ -20,15 +48,14 @@ const EnrollmentForm = () => {
                 <Input register={register} name="lrn" type="number" label="LRN" />
               </div>
               <div className="flex justify-start gap-3 w-full">
-                <Input register={register} name="firstName" type="text" label="First Name" />
-                <Input register={register} name="middleName" type="text" label="Middle Name" />
                 <Input register={register} name="lastName" type="text" label="Last Name" />
-                <Input register={register} name="prefixName" type="text" label="Prefix (Jr, II, III)" />
+                <Input register={register} name="middleName" type="text" label="Middle Name" />
+                <Input register={register} name="firstName" type="text" label="First Name" />
               </div>
               <div className="flex justify-between gap-3 w-full">
-                <Select register={register} name="genderSelect" label="Gender" />
-                <Select register={register} name="yearSelect" label="Year Level" />
-                <Select register={register} name="sectionSelect" label="Section" />
+                <Input register={register} name="birthday" type="date" label="Birthday" />
+                <SelectCustom register={register} name="gender" options={GenderOptions} label="Gender"  />
+                <SelectCustom register={register} name="year_section" options={yearSection} label="Year Level & Section"  />
               </div>
             </div>
 
@@ -38,7 +65,8 @@ const EnrollmentForm = () => {
                 <Input register={register} name="purok" type="text" label="Purok" />
                 <Input register={register} name="brgy" type="text" label="Barangay" />
                 <Input register={register} name="municipality" type="text" label="Municipality" />
-                <Input register={register} name="Province" type="text" label="Province" />
+                <Input register={register} name="province" type="text" label="Province" />
+                <Input register={register} name="zipcode" type="text" label="Zip Code" />
               </div>
               <div className="flex justify-between gap-3 w-full">
                 <Input register={register} name="fatherName" type="text" label="Father's Name" />
@@ -48,7 +76,7 @@ const EnrollmentForm = () => {
               </div>
             </div>
             <div className="card-actions justify-end my-5 ">
-              <button className="btn btn-md text-white rounded-[3px] w-[100px] btn-primary">Submit</button>
+              <button className="btn btn-md text-white rounded-[3px] w-[100px] btn-primary" type="submit" >Submit</button>
               <button className="btn btn-md text-white rounded-[3px] w-[100px] btn-error">Clear</button>
             </div>
           </form>
@@ -75,17 +103,20 @@ const Input = ({ name, register, ...props }) => {
   );
 }
 
-function Select({ register, name, ...props }) {
+const SelectCustom = ({name, register, ...props}) => {
+  const options = props.options;
   return (
-    <label className="form-control w-full max-w-xs">
+    <label className="form-control w-full max-w-xs text-xs my-1">
       <div className="label">
         <span className="label-text text-xs">{props.label}</span>
-      </div><undefined />
-      <select {...register(name, {
-        required: 'Select one option',
-      })} name={name} {...props} className="select select-sm h-9 select-bordered">
-        <option defaultValue={true}>Male</option>
-        <option>Female</option>
+      </div>
+      <select name={name} {...register(name, {
+        required: true
+        })}
+        className="input h-9 input-bordered w-full max-w-xs">
+        {options.map((option) => (
+          <option key={option.value} value={option.value}>{option.label}</option>
+        ))}
       </select>
     </label>
   );

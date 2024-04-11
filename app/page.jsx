@@ -1,3 +1,4 @@
+import connectDB from "@/libs/mongodb";
 import Image from "next/image";
 
 export default function Home() {
