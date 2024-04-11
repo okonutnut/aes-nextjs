@@ -33,6 +33,13 @@ const EnrollmentForm = () => {
 
   const onSubmit = (data) => {
     console.log(data)
+    axios.post('/api/enroll', data)
+      .then(response => {
+        console.log(response);
+      })
+      .catch(error => {
+        console.log(error);
+      })
   }
   
   return (
@@ -44,18 +51,18 @@ const EnrollmentForm = () => {
             <div className="content my-3">
               <h3 className="text-lg font-semibold">Learner&apos;s Information</h3>
               <div className="flex justify-between gap-3 w-full">
-                <Input register={register} name="studentID" type="text" label="Student ID" />
+                <Input register={register} name="student_id" type="text" label="Student ID" />
                 <Input register={register} name="lrn" type="number" label="LRN" />
               </div>
               <div className="flex justify-start gap-3 w-full">
-                <Input register={register} name="lastName" type="text" label="Last Name" />
-                <Input register={register} name="middleName" type="text" label="Middle Name" />
-                <Input register={register} name="firstName" type="text" label="First Name" />
+                <Input register={register} name="last_name" type="text" label="Last Name" />
+                <Input register={register} name="middle_name" type="text" label="Middle Name" />
+                <Input register={register} name="first_name" type="text" label="First Name" />
               </div>
               <div className="flex justify-between gap-3 w-full">
                 <Input register={register} name="birthday" type="date" label="Birthday" />
                 <SelectCustom register={register} name="gender" options={GenderOptions} label="Gender"  />
-                <SelectCustom register={register} name="year_section" options={yearSection} label="Year Level & Section"  />
+                <SelectCustom register={register} name="year_level_section" options={yearSection} label="Year Level & Section"  />
               </div>
             </div>
 
@@ -69,10 +76,10 @@ const EnrollmentForm = () => {
                 <Input register={register} name="zipcode" type="text" label="Zip Code" />
               </div>
               <div className="flex justify-between gap-3 w-full">
-                <Input register={register} name="fatherName" type="text" label="Father's Name" />
-                <Input register={register} name="fatherContact" type="text" label="Father's Contact" />
-                <Input register={register} name="motherName" type="text" label="Mother's Name" />
-                <Input register={register} name="motherContact" type="text" label="Mother's Contact" />
+                <Input register={register} name="father_name" type="text" label="Father's Name" />
+                <Input register={register} name="father_contact" type="text" label="Father's Contact" />
+                <Input register={register} name="mother_name" type="text" label="Mother's Name" />
+                <Input register={register} name="mother_contact" type="text" label="Mother's Contact" />
               </div>
             </div>
             <div className="card-actions justify-end my-5 ">

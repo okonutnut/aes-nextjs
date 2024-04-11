@@ -8,14 +8,14 @@ const EnrolleeSchema = new Schema({
   "middle_name": String,
   "last_name": String,
   "gender": String,
-  "year_level": String,
-  "section_name": String,
+  "year_level_section": String,
 
   // Address & Contact Information
   "purok": String,
   "barangay": String,
   "municipality": String,
   "province": String,
+  "zip_code": String,
   "father_name": String,
   "father_contact": String,
   "mother_name": String,

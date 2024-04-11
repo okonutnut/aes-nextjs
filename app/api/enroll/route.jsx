@@ -4,22 +4,12 @@ import { NextResponse } from "next/server";
 
 export async function POST(request) {
   const {
-    student_id,
-    lrn,
-    first_name,
-    middle_name,
-    last_name,
-    gender,
-    year_level,
-    section_name,
-    purok,
-    barangay,
-    municipality,
-    province,
-    father_name,
-    father_contact,
-    mother_name,
-    mother_contact
+    student_id, lrn,
+    first_name, middle_name, last_name,
+    gender, year_level_section,
+    purok, barangay, municipality, province, zip_code,
+    father_name, father_contact,
+    mother_name, mother_contact
   } = await request.json();
 
   await connectDB();
@@ -28,8 +18,8 @@ export async function POST(request) {
       {
         student_id, lrn,
         first_name, middle_name, last_name,
-        gender, year_level, section_name,
-        purok, barangay, municipality, province,
+        gender, year_level_section,
+        purok, barangay, municipality, province, zip_code,
         father_name, father_contact,
         mother_name, mother_contact
       }
