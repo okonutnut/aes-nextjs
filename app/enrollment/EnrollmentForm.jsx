@@ -36,9 +36,11 @@ const EnrollmentForm = () => {
     axios.post('/api/enroll', data)
       .then(response => {
         console.log(response);
+        alert('Successfully Enrolled');
       })
       .catch(error => {
         console.log(error);
+        alert('Error in Enrolling');
       })
   }
   
@@ -46,15 +48,14 @@ const EnrollmentForm = () => {
     <>
       <div className="card lg:card-side bg-base-100">
         <div className="card-body p-2">
-          <h2 className="card-title">Enrollment Form</h2>
           <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col p-3">
+            <h3 className="text-lg font-semibold">Learner&apos;s Information</h3>
             <div className="content my-3">
-              <h3 className="text-lg font-semibold">Learner&apos;s Information</h3>
               <div className="flex justify-between gap-3 w-full">
                 <Input register={register} name="student_id" type="text" label="Student ID" />
                 <Input register={register} name="lrn" type="number" label="LRN" />
               </div>
-              <div className="flex justify-start gap-3 w-full">
+              <div className="flex justify-between gap-3 w-full">
                 <Input register={register} name="last_name" type="text" label="Last Name" />
                 <Input register={register} name="middle_name" type="text" label="Middle Name" />
                 <Input register={register} name="first_name" type="text" label="First Name" />
@@ -83,8 +84,8 @@ const EnrollmentForm = () => {
               </div>
             </div>
             <div className="card-actions justify-end my-5 ">
-              <button className="btn btn-md text-white rounded-[3px] w-[100px] btn-primary" type="submit" >Submit</button>
-              <button className="btn btn-md text-white rounded-[3px] w-[100px] btn-error">Clear</button>
+              <button className="btn btn-sm text-[13px] text-white rounded-[3px] w-[100px] btn-primary" type="submit" >Submit</button>
+              <button className="btn btn-sm text-[13px] text-white rounded-[3px] w-[100px] btn-error" type="cancel">Clear</button>
             </div>
           </form>
         </div>

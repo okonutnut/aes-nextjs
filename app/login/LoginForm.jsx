@@ -1,21 +1,23 @@
 'use client'
 import { useForm } from 'react-hook-form'
+import { useState } from 'react'
 import axios from 'axios'
-import { NextRequest } from 'next/server';
 import next from 'next';
 
 const LoginForm = () => {
   const { register, handleSubmit } = useForm();
+  const [error, setError] = useState(false);
 
   const onSubmit = async (data) => {
     console.log(data);
     axios.post('/api/login', data)
       .then((response) => {
         console.log(response.data);
-        next.router.push('/dashboard');
+        response.data.status == "Success" ? next.router.push('/dashboard') : setError(true);
       })
-      .catch((error) => { 
+      .catch((error) => {
         console.log("Error : " + error);
+        setError(true);
       });
   }
 
@@ -33,7 +35,7 @@ const LoginForm = () => {
           required: true
         })} type="password" className="grow" placeholder="Password" />
       </label>
-      
+      {error && <p className="text-red-500 text-center text-xs font-light">** Invalid credentials **</p>}
       <button className='btn btn-success text-white'>Sign in</button>
     </form>
   )

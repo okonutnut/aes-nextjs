@@ -13,10 +13,10 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en" data-theme="emerald">
-      <body className={inter.className}>
+      <body className={inter.className} style={{background: "var --bg-base-100"}}>
         <Navbar/>
         <div className="flex pt-[4rem]">
-          <div className="fixed w-1/5">
+          <div className="fixed w-1/5 bottom-0 top-[4rem]">
             <Sidebar />
           </div>
           <div className="w-full ps-[20%]">

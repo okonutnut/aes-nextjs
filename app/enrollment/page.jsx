@@ -1,9 +1,11 @@
-import EnrollmentForm from "../../components/EnrollmentForm"
+import EnrollmentForm from "./EnrollmentForm"
 
 const Enrollment = () => {
   return (
     <>
-      <EnrollmentForm />
+      <div className="ps-4 pe-[9rem]">
+        <EnrollmentForm />
+      </div>
     </>
   )
 }
