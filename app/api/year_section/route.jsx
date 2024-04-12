@@ -1,5 +1,5 @@
 import connectDB from "@/libs/mongodb";
-import yearSection from "@/model/year_section";
+import yearSection from "@/model/year_section.model";
 import { NextResponse } from "next/server";
 
 // This is the API route for year_section

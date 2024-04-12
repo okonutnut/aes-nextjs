@@ -1,5 +1,5 @@
 import connectDB from "@/libs/mongodb";
-import Enrollee from "@/model/enrollee";
+import Enrollee from "@/model/enrollee.model";
 import { NextResponse } from "next/server";
 
 export async function POST(request) {

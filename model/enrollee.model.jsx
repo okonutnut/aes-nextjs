@@ -2,7 +2,11 @@ import mongoose, { Schema, models } from "mongoose";
 
 const EnrolleeSchema = new Schema({
   // Learner's Information
-  "student_id": String,
+  "student_id": {
+    type: String,
+    required: true,
+    unique: true,
+  },
   "lrn": String,
   "first_name": String,
   "middle_name": String,
