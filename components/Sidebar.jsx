@@ -1,6 +1,6 @@
 'use client';
 import { useRouter } from "next/navigation";
-import { MdDashboard, MdDns, MdEditNote, MdInfo, MdManageAccounts, MdSummarize } from "react-icons/md";
+import { MdDashboard, MdDns, MdEditNote, MdInfo, MdManageAccounts, MdSummarize, MdViewList } from "react-icons/md";
 export const Sidebar = () => {
   const router = useRouter();
   const btnClass = "focus:bg-primary focus:text-base-100 py-2 p-3 leading-normal bg-inherit border-0 font-medium";
@@ -17,7 +17,7 @@ export const Sidebar = () => {
               </button>
             </li>
             <li>
-              <details open>
+              <details close>
                 <summary className="py-2 p-3 leading-normal font-medium">
                   <MdEditNote className="text-primary" />
                   Enrollment
@@ -25,22 +25,36 @@ export const Sidebar = () => {
                 <ul>
                   <li>
                     <button onClick={() => router.push('/enrollment')} className={btnClass}>
-                      New Enrollee
+                      New Student
                     </button>
                   </li>
                   <li>
                     <button onClick={() => router.push('/enrollment')} className={btnClass} disabled>
-                      Old Enrollee
+                      Old Student
                     </button>
                   </li>
                 </ul>
               </details>
             </li>
             <li>
-              <button onClick={() => router.push('/reports')} className={btnClass}>
-                <MdSummarize className="text-error" />
-                Reports
-              </button>
+              <details close>
+                <summary className="py-2 p-3 leading-normal font-medium">
+                  <MdViewList className="text-error" />
+                  View
+                </summary>
+                <ul>
+                  <li>
+                    <button onClick={() => router.push('/view/enrollees')} className={btnClass}>
+                      Enrollees
+                    </button>
+                  </li>
+                  <li>
+                    <button onClick={() => router.push('/enrollment')} className={btnClass} disabled>
+                      Reports
+                    </button>
+                  </li>
+                </ul>
+              </details>
             </li>
           </ul>
         </section>

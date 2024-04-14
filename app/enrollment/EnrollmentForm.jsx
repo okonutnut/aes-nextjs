@@ -23,7 +23,7 @@ const EnrollmentForm = () => {
             label: `${item.year_level} - ${item.section_name}`
           }
         });
-        console.log(dataArray);
+        // console.log(dataArray);
         setYearSection(dataArray);
       })
       .catch(error => {
