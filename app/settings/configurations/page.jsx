@@ -10,22 +10,17 @@ const ConfigurationsPage = () => {
   };
 
   return (
-    <ViewContent>
+    <>
       <div className="card w-96 bg-base-100 border">
-        <div className="card-body">
-          <h2 className="card-title">Year & Sections</h2>
-          <form onSubmit={handleSubmit(onSubmit)}>
-            <Input register={register} name="yearInput" placeholder="Year Level" type="number"/>
-            <Input register={register} name="sectionInput" placeholder="Section Name" type="text"/>
-            <Input register={register} name="adviserInput" placeholder="Adviser" type="text"/>
-            <Input register={register} name="roomInput" placeholder="Room" type="text"/>
-            <div className="card-actions justify-end">
-              <button className="btn btn-sm btn-primary mt-2" type="submit">Register</button>
-            </div>
-          </form>
+        <div className="card-body p-4">
+          <section className="card-title justify-between">
+            <h2 className="2xl">Manage Year & Sections</h2>
+            <button className="btn btn-sm btn-info border-r">ADD</button>
+          </section>
+          
         </div>
       </div>
-    </ViewContent>
+    </>
   );
 }
 
