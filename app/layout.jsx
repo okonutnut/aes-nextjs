@@ -2,6 +2,7 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import { Navbar } from "@/components/Navbar";
 import { Sidebar } from "@/components/Sidebar";
+import ViewContent from "@/components/Containers/ViewContent";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -16,13 +17,13 @@ export default function RootLayout({ children }) {
       <body className={inter.className} style={{background: "var --bg-base-100"}}>
         <Navbar/>
         <div className="flex pt-[4rem]">
-          <div className="fixed w-1/5 bottom-0 top-[4rem]">
+          <div className="fixed w-1-2 bottom-0 top-[4rem]">
             <Sidebar />
           </div>
-          <div className="w-full ps-[20%]">
-            <div className="w-full flex justify-start items-baseline">
+          <div className="w-full ps-[18%]">
+            <ViewContent>
               {children}
-            </div>
+            </ViewContent>
           </div>
         </div>
       </body>

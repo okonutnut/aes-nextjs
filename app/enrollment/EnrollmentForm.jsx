@@ -1,7 +1,7 @@
 'use client'
 import { useForm } from "react-hook-form"
 import axios from 'axios'
-import { useState, useEffect, use } from "react";
+import { useState, useEffect } from "react";
 
 const EnrollmentForm = () => {
 
@@ -85,7 +85,6 @@ const EnrollmentForm = () => {
             </div>
             <div className="card-actions justify-end my-5 ">
               <button className="btn btn-sm text-[13px] text-white rounded-[3px] w-[100px] btn-primary" type="submit" >Submit</button>
-              <button className="btn btn-sm text-[13px] text-white rounded-[3px] w-[100px] btn-error" type="cancel">Clear</button>
             </div>
           </form>
         </div>
@@ -121,7 +120,7 @@ const SelectCustom = ({name, register, ...props}) => {
       <select name={name} {...register(name, {
         required: true
         })}
-        className="input h-9 input-bordered w-full max-w-xs">
+        className="h-9 select select-sm select-bordered w-full max-w-xs">
         {options.map((option) => (
           <option key={option.value} value={option.value}>{option.label}</option>
         ))}

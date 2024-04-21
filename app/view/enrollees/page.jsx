@@ -24,7 +24,7 @@ const EnrolleesPage = () => {
   };
 
   return (
-    <div className="w-full me-[9rem] ms-[3rem] my-2">
+    <>
       <h1 className="text-2xl font-extrabold my-2">Enrollees Page</h1>
       <section className="w-full">
         <div className="overflow-x-auto border rounded-md">
@@ -52,7 +52,7 @@ const EnrolleesPage = () => {
           </table>
         </div>
       </section>
-    </div>
+    </>
   );
 };
 
