@@ -14,7 +14,7 @@ const EnrolleesPage = () => {
       })
       .catch(error => {
         console.log(error);
-      });
+      })
   }, []);
 
   // Handle row click 
