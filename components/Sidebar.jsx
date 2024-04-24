@@ -8,7 +8,7 @@ export const Sidebar = () => {
     <>
       <div className="flex flex-col justify-between items-start border-r shadow-lg py-5 h-full">
         <section className="w-full">
-          <h1 className="mx-5 text-xs font-semibold">Menu Items</h1>
+          <h1 className="mx-5 text-xs font-semibold">Navigation</h1>
           <ul className="menu bg-base-100 text-neutral px-5 w-full">
             <li>
               <button onClick={() => router.push('/dashboard')} className={btnClass}>

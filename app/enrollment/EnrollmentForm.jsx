@@ -5,7 +5,7 @@ import { useState, useEffect } from "react";
 
 const EnrollmentForm = () => {
 
-  const { register, handleSubmit } = useForm();
+  const { register, handleSubmit, reset } = useForm();
 
   const GenderOptions = [
     { value: "Male", label: "Male" },
@@ -42,60 +42,58 @@ const EnrollmentForm = () => {
         console.log(error);
         alert('Error in Enrolling');
       })
+
+    reset();
   }
-  
+
   return (
     <>
-      <div className="card lg:card-side bg-base-100">
-        <div className="card-body p-2">
-          <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col p-3">
-            <h3 className="text-lg font-semibold">Learner&apos;s Information</h3>
-            <div className="content my-3">
-              <div className="flex justify-between gap-3 w-full">
-                <Input register={register} name="student_id" type="text" label="Student ID" />
-                <Input register={register} name="lrn" type="number" label="LRN" />
-              </div>
-              <div className="flex justify-between gap-3 w-full">
-                <Input register={register} name="last_name" type="text" label="Last Name" />
-                <Input register={register} name="middle_name" type="text" label="Middle Name" />
-                <Input register={register} name="first_name" type="text" label="First Name" />
-              </div>
-              <div className="flex justify-between gap-3 w-full">
-                <Input register={register} name="birthday" type="date" label="Birthday" />
-                <SelectCustom register={register} name="gender" options={GenderOptions} label="Gender"  />
-                <SelectCustom register={register} name="year_level_section" options={yearSection} label="Year Level & Section"  />
-              </div>
-            </div>
-
-            <div className="content my-3">
-              <h3 className="text-lg font-semibold">Address & Contact</h3>
-              <div className="flex justify-start gap-3 w-full">
-                <Input register={register} name="purok" type="text" label="Purok" />
-                <Input register={register} name="brgy" type="text" label="Barangay" />
-                <Input register={register} name="municipality" type="text" label="Municipality" />
-                <Input register={register} name="province" type="text" label="Province" />
-                <Input register={register} name="zipcode" type="text" label="Zip Code" />
-              </div>
-              <div className="flex justify-between gap-3 w-full">
-                <Input register={register} name="father_name" type="text" label="Father's Name" />
-                <Input register={register} name="father_contact" type="text" label="Father's Contact" />
-                <Input register={register} name="mother_name" type="text" label="Mother's Name" />
-                <Input register={register} name="mother_contact" type="text" label="Mother's Contact" />
-              </div>
-            </div>
-            <div className="card-actions justify-end my-5 ">
-              <button className="btn btn-sm text-[13px] text-white rounded-[3px] w-[100px] btn-primary" type="submit" >Submit</button>
-            </div>
-          </form>
+      <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col">
+        <div className="my-3">
+          <h3 className="text-[18px] font-semibold">Learner&apos;s Information</h3>
+          <div className="flex justify-between gap-3 w-full">
+            <Input register={register} name="student_id" type="text" label="Student ID" />
+            <Input register={register} name="lrn" type="number" label="Learner's Reference Number (LRN)" />
+          </div>
+          <div className="flex justify-between gap-3 w-full">
+            <Input register={register} name="last_name" type="text" label="Last Name" />
+            <Input register={register} name="middle_name" type="text" label="Middle Name" />
+            <Input register={register} name="first_name" type="text" label="First Name" />
+          </div>
+          <div className="flex justify-between gap-3 w-full">
+            <Input register={register} name="birthday" type="date" label="Birthday" />
+            <SelectCustom register={register} name="gender" options={GenderOptions} label="Gender" />
+            <SelectCustom register={register} name="year_level_section" options={yearSection} label="Year Level & Section" />
+          </div>
         </div>
-      </div>
+
+        <div className="my-3">
+          <h3 className="text-[18px] font-semibold">Address & Contact</h3>
+          <div className="flex justify-start gap-3 w-full">
+            <Input register={register} name="purok" type="text" label="Purok" />
+            <Input register={register} name="brgy" type="text" label="Barangay" />
+            <Input register={register} name="municipality" type="text" label="Municipality" />
+            <Input register={register} name="province" type="text" label="Province" />
+            <Input register={register} name="zipcode" type="text" label="Zip Code" />
+          </div>
+          <div className="flex justify-between gap-3 w-full">
+            <Input register={register} name="father_name" type="text" label="Father's Name" />
+            <Input register={register} name="father_contact" type="text" label="Father's Contact" />
+            <Input register={register} name="mother_name" type="text" label="Mother's Name" />
+            <Input register={register} name="mother_contact" type="text" label="Mother's Contact" />
+          </div>
+        </div>
+        <div className="justify-end my-5 ">
+          <button className="btn btn-sm text-[13px] text-white rounded-[3px] w-[100px] btn-primary" type="submit" >Submit</button>
+        </div>
+      </form>
     </>
   )
 }
 
 const Input = ({ name, register, ...props }) => {
   return (
-    <label className="form-control w-full max-w-xs text-xs my-1">
+    <label className="text-[14px] form-control w-full max-w-xs text-xs my-1">
       <div className="label">
         <span className="label-text text-xs">{props.label}</span>
       </div>
@@ -105,22 +103,22 @@ const Input = ({ name, register, ...props }) => {
         name={name}
         type={props.type}
         placeholder="Type here"
-        className="input h-9 input-bordered w-full max-w-xs" />
+        className="text-[14px] h-9 input input-bordered w-full max-w-xs" />
     </label>
   );
 }
 
-const SelectCustom = ({name, register, ...props}) => {
+const SelectCustom = ({ name, register, ...props }) => {
   const options = props.options;
   return (
-    <label className="form-control w-full max-w-xs text-xs my-1">
+    <label className="text-[14px] form-control w-full max-w-xs my-1">
       <div className="label">
         <span className="label-text text-xs">{props.label}</span>
       </div>
       <select name={name} {...register(name, {
         required: true
-        })}
-        className="h-9 select select-sm select-bordered w-full max-w-xs">
+      })}
+        className="text-[14px] h-9 select select-sm select-bordered w-full max-w-xs">
         {options.map((option) => (
           <option key={option.value} value={option.value}>{option.label}</option>
         ))}

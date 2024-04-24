@@ -3,7 +3,9 @@ import { useForm } from "react-hook-form";
 import axios from "axios";
 
 const ConfigurationsPage = () => {
-  const { register, handleSubmit } = useForm();
+  const { register, handleSubmit, reset } = useForm();
+
+  const year_level = [7, 8, 9, 10, 11, 12];
 
   const onSubmit = (data) => {
     // POST data to DB
@@ -12,6 +14,7 @@ const ConfigurationsPage = () => {
     .then((response) => {
       console.log(response.data);
       response.data.status == "Success" ? alert("Added") : setError(true);
+      reset();
     })
     .catch((error) => {
       console.log("Error : " + error);
@@ -27,7 +30,8 @@ const ConfigurationsPage = () => {
             <h2 className="font-">Add Year & Sections</h2>
           </section>
           <form onSubmit={handleSubmit(onSubmit)}>
-            <Input register={register} name='year_level' placeholder='Year Level' type='number' />
+            {/* <Input register={register} name='year_level' placeholder='Year Level' type='number' /> */}
+            <Select register={register} name='year_level' options={year_level} />
             <Input register={register} name='section_name' placeholder='Section Name' type='text' />
             <Input register={register} name='adviser' placeholder='Adviser' type='text' />
             <Input register={register} name='room' placeholder='Room' type='text' />
@@ -37,6 +41,19 @@ const ConfigurationsPage = () => {
       </div>
     </>
   );
+}
+
+function Select({ register, name, options }) {
+  return (
+    <label>
+      <select {...register(name)} name={name} className="select select-bordered select-sm h-9 w-full">
+        {options.map((option) => (
+          <option key={option} value={option}>Grade {option}</option>
+        ))}
+      </select>
+    </label>
+  );
+
 }
 
 

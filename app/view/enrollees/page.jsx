@@ -25,11 +25,13 @@ const EnrolleesPage = () => {
 
   return (
     <>
-      <h1 className="text-2xl font-extrabold my-2">Enrollees Page</h1>
-      <section className="w-full">
+      <h1 className="text-[24px] font-bold">Enrollee List</h1>
+      {/* Add date range for filtering */}
+
+      <section className="w-full my-3">
         <div className="overflow-x-auto border rounded-md">
-          <table className="table table-md">
-            <thead>
+          <table className="table table-xs">
+            <thead className="text-[14px]">
               <tr>
                 <th>No</th>
                 <th>Student ID</th>
@@ -38,7 +40,7 @@ const EnrolleesPage = () => {
                 <th>Date Enrolled</th>
               </tr>
             </thead>
-            <tbody>
+            <tbody className="text-[12px]">
               {enrollees.map((enrollee, index) => (
                 <tr key={enrollee.id} onClick={onRowClick} className="hover">
                   <td className="font-semibold">{index + 1}</td>
