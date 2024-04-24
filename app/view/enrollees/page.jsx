@@ -30,7 +30,7 @@ const EnrolleesPage = () => {
 
       <section className="w-full my-3">
         <div className="overflow-x-auto border rounded-md">
-          <table className="table table-xs">
+          <table className="table table-md">
             <thead className="text-[14px]">
               <tr>
                 <th>No</th>

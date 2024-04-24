@@ -13,6 +13,7 @@ const EnrolleeSchema = new Schema({
   "last_name": String,
   "gender": String,
   "year_level_section": String,
+  "student_type": String,
 
   // Address & Contact Information
   "purok": String,
