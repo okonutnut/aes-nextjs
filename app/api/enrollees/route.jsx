@@ -10,9 +10,6 @@ export async function GET(request) {
       $project: {
         _id: 1,
         student_id: 1,
-        last_name: 1,
-        first_name: 1,
-        middle_name: 1,
         year_level_section: 1,
         createdAt: {
           $dateToString: {

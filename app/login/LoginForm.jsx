@@ -1,19 +1,19 @@
 'use client'
 import { useForm } from 'react-hook-form'
 import { useState } from 'react'
+import { useRouter } from 'next/navigation'
 import axios from 'axios'
-import next from 'next';
 
 const LoginForm = () => {
+  const router = useRouter()
   const { register, handleSubmit } = useForm();
   const [error, setError] = useState(false);
 
   const onSubmit = async (data) => {
-    console.log(data);
-    axios.post('/api/login', data)
+    await axios.post('/api/login', data)
       .then((response) => {
         console.log(response.data);
-        response.data.status == "Success" ? next.router.push('/dashboard') : setError(true);
+        response.data.status == "Success" ? router.push('/dashboard') : setError(true);
       })
       .catch((error) => {
         console.log("Error : " + error);

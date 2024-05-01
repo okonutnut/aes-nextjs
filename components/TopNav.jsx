@@ -1,6 +1,6 @@
 'use client'
 import { useRouter } from "next/navigation"
-export const Navbar = () => {
+const TopNav = () => {
   const router = useRouter();
   return (
     <>
@@ -8,7 +8,7 @@ export const Navbar = () => {
         <div className="flex-1">
           <a className="btn btn-ghost text-xl font-black ms-4">
             <span>
-              <img src={"/logo.png"} width={50} />
+              <img src={"/logo.png"} width={50} alt="logo" />
             </span>
             NVGHS - AES
             <span className="text-[10px] align-bottom">
@@ -29,3 +29,5 @@ export const Navbar = () => {
     </>
   )
 }
+
+export default TopNav

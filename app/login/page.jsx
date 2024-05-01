@@ -5,7 +5,7 @@ const Login = () => {
       <div className="fixed left-0 top-0 right-0 bottom-0 z-50 bg-base-100">
         <div className="flex items-center h-screen">
           <div className="flex flex-col flex-1 items-center justify-center p-3">
-            <img src={'/logo.png'} width={200} className='m-4'/>
+            <img src={'/logo.png'} alt='logo' width={200} className='m-4'/>
             <LoginForm />
           </div>
           <div className="flex flex-col justify-center items-center h-full w-full bg-[url('/login-bg.jpg')] bg-cover relative">

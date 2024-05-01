@@ -1,12 +1,12 @@
 'use client';
 import { useRouter } from "next/navigation";
 import { MdDashboard, MdDns, MdEditNote, MdInfo, MdManageAccounts, MdSummarize, MdViewList } from "react-icons/md";
-export const Sidebar = () => {
+const Sidebar = () => {
   const router = useRouter();
-  const btnClass = "focus:bg-primary focus:text-base-100 py-2 p-3 leading-normal bg-inherit border-0 font-medium mb-1 text-[12px]";
+  const btnClass = "focus:bg-primary focus:text-base-100 py-2 p-3 leading-normal bg-inherit border-0 font-medium mb-1 text-[14px]";
   return (
     <>
-      <div className="flex flex-col justify-between items-start border-r shadow-lg py-5 h-full">
+      <div className="flex flex-col justify-between items-start border-r py-5 h-full">
         <section className="w-full">
           <h1 className="mx-5 text-xs font-semibold">Navigation</h1>
           <ul className="menu bg-base-100 text-neutral px-5 w-full">
@@ -17,35 +17,40 @@ export const Sidebar = () => {
               </button>
             </li>
             <li>
-              <details open>
-                <summary className="py-2 p-3 leading-normal font-medium">
+              <details>
+                <summary className="py-2 p-3 leading-normal font-medium text-[14px]">
                   <MdEditNote className="text-primary" />
-                  Enrollment
+                  Data Entry
                 </summary>
                 <ul>
                   <li>
-                    <button onClick={() => router.push('/enrollment')} className={btnClass}>
-                      New Student
+                    <button onClick={() => router.push('/data-entry/registration')} className={btnClass}>
+                      Registration
                     </button>
                   </li>
                   <li>
-                    <button onClick={() => router.push('/enrollment')} className={btnClass} disabled>
-                      Old Student
+                    <button onClick={() => router.push('/data-entry/enrollment')} className={btnClass}>
+                      Enrollment
                     </button>
                   </li>
                 </ul>
               </details>
             </li>
             <li>
-              <details open>
-                <summary className="py-2 p-3 leading-normal font-medium">
+              <details>
+                <summary className="py-2 p-3 leading-normal font-medium text-[14px]">
                   <MdViewList className="text-error" />
                   View
                 </summary>
                 <ul>
                   <li>
                     <button onClick={() => router.push('/view/enrollees')} className={btnClass}>
-                      Enrollee List
+                      Enrollees
+                    </button>
+                  </li>
+                  <li>
+                    <button onClick={() => router.push('/view/students')} className={btnClass}>
+                      Students
                     </button>
                   </li>
                   <li>
@@ -85,4 +90,6 @@ export const Sidebar = () => {
       </div>
     </>
   );
-};
+}
+
+export default Sidebar

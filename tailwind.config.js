@@ -12,6 +12,6 @@ module.exports = {
   },
   plugins: [daisyui],
   daisyui: {
-    themes: ['emerald', 'forest'],
+    themes: ['emerald', 'forest', 'corporate'],
   },
 };
