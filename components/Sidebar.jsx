@@ -6,7 +6,7 @@ const Sidebar = () => {
   const btnClass = "focus:bg-primary focus:text-base-100 py-2 p-3 leading-normal bg-inherit border-0 font-medium mb-1 text-[14px]";
   return (
     <>
-      <div className="flex flex-col justify-between items-start border-r py-5 h-full">
+      <div className="flex flex-col justify-between items-start border-r pt-5 h-full">
         <section className="w-full">
           <h1 className="mx-5 text-xs font-semibold">Navigation</h1>
           <ul className="menu bg-base-100 text-neutral px-5 w-full">
@@ -65,12 +65,12 @@ const Sidebar = () => {
         </section>
 
         <section className="w-full">
-          <h1 className="mx-5 text-xs font-semibold">Settings</h1>
+          <h1 className="mx-5 text-xs font-semibold">Help</h1>
           <ul className="menu bg-base-100 text-neutral px-5 w-full">
             <li>
               <button onClick={() => router.push('/settings/configurations')} className={btnClass}>
                 <MdDns className="text-secondary" />
-                System Configuration
+                Settings
               </button>
             </li>
             <li>

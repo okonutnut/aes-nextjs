@@ -16,9 +16,17 @@ const TopNav = () => {
             </span>
           </a>
         </div>
-        <div className="flex-none">
+        <div className="flex-none gap-3">
+          <div className="form-control">
+            <h3 className="align-middle font-semibold">Hello, Darlito Dela Cruz Cabalse !</h3>
+            <p>Logged in: hh:mm</p>
+          </div>
           <div className="dropdown dropdown-end">
-            <div tabIndex={0} role="button" className="my-1 mx-4">...</div>
+            <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar">
+              <div className="w-10 rounded-full">
+                <img alt="Tailwind CSS Navbar component" src="https://daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg" />
+              </div>
+            </div>
             <ul tabIndex={0} className="dropdown-content z-[1] menu p-2 shadow bg-base-100 border rounded-box w-52">
               <li><button onClick={() => router.push('/login')}>Profile</button></li>
               <li><button onClick={() => router.push('/login')}>Logout</button></li>

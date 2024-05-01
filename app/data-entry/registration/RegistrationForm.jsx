@@ -15,13 +15,13 @@ const RegistrationForm = () => {
 
   const onSubmit = async (data) => {
     setIsLoading(true);
-    await axios.post('/api/student', data)
+    await axios.post('/api/students', data)
       .then(response => {
+        setIsLoading(false);
         if(response.data.status == 'Success') {
-          setIsLoading(false);
           alert('Successfully Registered');
+          reset();
         } else {
-          setIsLoading(false);
           alert('Could not register student. Check if student is existing then try again.');
         }
       })
@@ -29,8 +29,6 @@ const RegistrationForm = () => {
         setIsLoading(false);
         alert('Error on server! Please try again later.');
       })
-
-    reset();
   }
 
   return (
