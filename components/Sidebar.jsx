@@ -17,24 +17,10 @@ const Sidebar = () => {
               </button>
             </li>
             <li>
-              <details>
-                <summary className="py-2 p-3 leading-normal font-medium text-[14px]">
+                <button onClick={()=> router.push('/data-entry')} className={btnClass}>
                   <MdEditNote className="text-primary" />
                   Data Entry
-                </summary>
-                <ul>
-                  <li>
-                    <button onClick={() => router.push('/data-entry/registration')} className={btnClass}>
-                      Registration
-                    </button>
-                  </li>
-                  <li>
-                    <button onClick={() => router.push('/data-entry/enrollment')} className={btnClass}>
-                      Enrollment
-                    </button>
-                  </li>
-                </ul>
-              </details>
+                </button>
             </li>
             <li>
               <details>

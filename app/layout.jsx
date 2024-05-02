@@ -17,10 +17,10 @@ export default function RootLayout({ children }) {
       <body className={inter.className} style={{background: "var --bg-base-100"}}>
         <TopNav />
         <div className="flex pt-[4rem]">
-          <div className="fixed bottom-0 top-[4rem] w-[25%]">
+          <div className="fixed bottom-0 top-[4rem] w-[18%]">
             <Sidebar />
           </div>
-          <div className="w-full ps-[25%]">
+          <div className="container ps-[18%]">
             <ViewContent>
               {children}
             </ViewContent>

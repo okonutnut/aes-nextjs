@@ -10,9 +10,9 @@ const TopNav = () => {
             <span>
               <img src={"/logo.png"} width={50} alt="logo" />
             </span>
-            NVGHS - AES
+            NVGCHS - AES
             <span className="text-[10px] align-bottom">
-              v1.1
+              v1.0
             </span>
           </a>
         </div>

@@ -8,18 +8,19 @@ const LoginForm = () => {
   const router = useRouter()
   const { register, handleSubmit } = useForm();
   const [error, setError] = useState(false);
+  const [declined, setDeclined] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
   const onSubmit = async (data) => {
     setIsLoading(true)
     await axios.post('/api/login', data)
       .then((response) => {
+        response.data.status == "Success" ? router.push('/dashboard') : setDeclined(true);
         setIsLoading(false)
-        response.data.status == "Success" ? router.push('/dashboard') : setError(true);
       })
       .catch((error) => {
-        setIsLoading(false)
         setError(true)
+        setIsLoading(false)
       });
   }
 
@@ -38,8 +39,9 @@ const LoginForm = () => {
             required: true
           })} type="password" className="grow" placeholder="Password" />
         </label>
-        {error && <p className="text-red-500 text-center text-xs font-light">** Invalid credentials **</p>}
         {isLoading ? <button className='btn btn-success text-white' disabled={true}><span className='loading loading-spinner loading-sm'></span></button> : <button className='btn btn-success text-white'>Sign in</button>}
+        {error && <p className="text-red-500 text-center text-sm font-light">** Error on server. **</p>}
+        {declined && <p className="text-red-500 text-center text-sm font-light">** Invalid credentials. **</p>}
       </form>
     </>
   )

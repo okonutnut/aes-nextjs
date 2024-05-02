@@ -6,7 +6,7 @@ import { NextResponse } from "next/server";
 export async function GET(request) {
   await connectDB();
   return NextResponse.json(
-    await yearSection.find({})
+    await yearSection.find({}, { _id: 0, __v: 0, createdAt: 0, updatedAt: 0 })
   );
 }
 
