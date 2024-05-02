@@ -3,7 +3,6 @@ import { useForm } from 'react-hook-form'
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import axios from 'axios'
-import LoadingScreen from '@/components/Loading/LoadingScreen'
 
 const LoginForm = () => {
   const router = useRouter()
@@ -26,7 +25,6 @@ const LoginForm = () => {
 
   return (
     <>
-      {isLoading && <LoadingScreen/>}
       <form className="flex flex-col w-96 gap-2 px-4 my-3" onSubmit={handleSubmit(onSubmit)}>
         <label className="input input-md input-bordered flex items-center gap-2 my-1">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" className="w-4 h-4 opacity-70"><path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6ZM12.735 14c.618 0 1.093-.561.872-1.139a6.002 6.002 0 0 0-11.215 0c-.22.578.254 1.139.872 1.139h9.47Z" /></svg>
@@ -41,7 +39,7 @@ const LoginForm = () => {
           })} type="password" className="grow" placeholder="Password" />
         </label>
         {error && <p className="text-red-500 text-center text-xs font-light">** Invalid credentials **</p>}
-        <button className='btn btn-success text-white'>Sign in</button>
+        {isLoading ? <button className='btn btn-success text-white' disabled={true}><span className='loading loading-spinner loading-sm'></span></button> : <button className='btn btn-success text-white'>Sign in</button>}
       </form>
     </>
   )
