@@ -10,7 +10,7 @@ const Login = () => {
           </div>
           <div className="flex flex-col justify-center items-center h-full w-full bg-[url('/login-bg.jpg')] bg-cover relative">
             <div className='h-full w-full bg-success absolute opacity-60'></div>
-            <p className="text-2xl text-white font-bold z-20">NVGHS - Automated Enrollment System</p>
+            <p className="text-2xl text-white font-bold z-20">NVGCHS - Automated Enrollment System</p>
             <p className="text-white z-20">Unofficial Enrollment System by Franco, Cabalse & Soriano</p>
           </div>
         </div>

@@ -3,10 +3,16 @@ import { useForm } from 'react-hook-form'
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import axios from 'axios'
+import { useSetAtom } from 'jotai'
+import { sessionUser } from '@/libs/atom'
 
 const LoginForm = () => {
   const router = useRouter()
+  
+  const setAdmin = useSetAtom(sessionUser);
+
   const { register, handleSubmit } = useForm();
+
   const [error, setError] = useState(false);
   const [declined, setDeclined] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
@@ -15,6 +21,7 @@ const LoginForm = () => {
     setIsLoading(true)
     await axios.post('/api/login', data)
       .then((response) => {
+        setAdmin(response.data.data)
         response.data.status == "Success" ? router.push('/dashboard') : setDeclined(true);
         setIsLoading(false)
       })
