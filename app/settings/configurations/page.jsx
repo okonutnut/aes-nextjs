@@ -21,8 +21,7 @@ const ConfigurationsPage = () => {
       label: "Senior High School"
     }
   ]
-
-  const year_level = [{
+  const jhs_level = [{
     value: 7,
     label: "Grade 7"
   }, {
@@ -34,15 +33,14 @@ const ConfigurationsPage = () => {
   }, {
     value: 10,
     label: "Grade 10"
-  }, {
+  }];
+  const shs_level = [{
     value: 11,
     label: "Grade 11"
   }, {
     value: 12,
     label: "Grade 12"
-  
   }];
-
   const strands = [{
     value: "STEM",
     label: "STEM"
@@ -66,7 +64,7 @@ const ConfigurationsPage = () => {
   const onSubmitYearSection = (data) => {
     // POST data to DB
     console.log(data);
-    axios.post('/api/year_section', data)
+    axios.post('/api/year_level', data)
     .then((response) => {
       console.log(response.data);
       response.data.status == HttpStatusCode.Created ? alert("Added") : alert("Error");
@@ -90,7 +88,7 @@ const ConfigurationsPage = () => {
               <div className="label">
                 <span className="label-text text-xs">Student Type</span>
               </div>
-              <select onChange={()=> selectedType(e.target.value)}  className="text-[14px] h-9 select select-sm select-bordered w-full max-w-xs">
+              <select onChange={(e) => setSelectedType(e.target.value)}  className="text-[14px] h-9 select select-sm select-bordered w-full max-w-xs">
                 {type.map((option) => (
                   <option key={option.value} value={option.value}>
                     {option.label}
@@ -98,7 +96,22 @@ const ConfigurationsPage = () => {
                 ))}
               </select>
             </label>
-            <FormSelect register={register} name='year_level' options={year_level} />
+            <label className="text-[14px] form-control w-full max-w-xs my-1">
+              <div className="label">
+                <span className="label-text text-xs">Year Level</span>
+              </div>
+              <select {...register('year_level', {required: true})}  className="text-[14px] h-9 select select-sm select-bordered w-full max-w-xs">
+                {selectedType === "JHS" ? jhs_level.map((option) => (
+                  <option key={option.value} value={option.value}>
+                    {option.label}
+                  </option>
+                )) : shs_level.map((option) => (
+                  <option key={option.value} value={option.value}>
+                    {option.label}
+                  </option>
+                ))}
+              </select>
+            </label>
             {selectedType === "SHS" && <FormSelect register={register} name='strand_name' options={strands} />}
             <FormInput register={register} name='section_name' label='Section Name' type='text' />
             <FormInput register={register} name='adviser' label='Adviser' type='text' />

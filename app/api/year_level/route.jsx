@@ -1,5 +1,6 @@
 import connectDB from "@/libs/mongodb";
 import yearSection from "@/model/year_section.model";
+import { HttpStatusCode } from "axios";
 import { NextResponse } from "next/server";
 
 // This is the API route for year_section
@@ -21,6 +22,6 @@ export async function POST(request) {
     room
   });
   return NextResponse.json(
-    post ? { status: "Success" } : { status: "Failed" }
+    post ? { status: HttpStatusCode.Created } : { status: "Failed" }
   );
 }
