@@ -2,9 +2,12 @@ import mongoose, { Schema, models } from "mongoose";
 
 const EnrolleeSchema = new Schema({
   // Learner's Information
-  "admin_id": String,
   "student_id": String,
-  "year_level_section": String,
+  "student_name": String,
+  "year_level": String,
+  "track": String,
+  "strand": String,
+  "section_name": String,
   "student_type": String,
   "semester": String,
   "school_year": String,

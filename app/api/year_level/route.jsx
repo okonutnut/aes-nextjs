@@ -11,11 +11,12 @@ export async function GET(request) {
 }
 
 export async function POST(request) {
-  const { year_level, section_name, adviser, room } = await request.json();
+  const { year_level, section_name, adviser, room, strand_name } = await request.json();
   await connectDB();
   const post = await yearSection.create({
     year_level,
     section_name,
+    strand_name,
     adviser,
     room
   });

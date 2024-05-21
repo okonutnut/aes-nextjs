@@ -5,6 +5,7 @@ const yearSectionSchema = new Schema(
     year_level: String,
     section_name: String,
     adviser: String,
+    strand_name: String,
     room: String
   }, 
   { timestamps: true }

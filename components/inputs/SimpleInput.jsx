@@ -7,7 +7,7 @@ export function SimpleInput({label, value, type, readOnly}) {
       <input
         type={type}
         value={value}
-        className="text-[14px] h-9 input input-bordered w-full max-w-xs"
+        className="text-[14px] input input-sm input-bordered w-full max-w-xs"
         {...readOnly && {readOnly: true}}
       />
     </label>

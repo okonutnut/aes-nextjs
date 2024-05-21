@@ -24,7 +24,7 @@ const Sidebar = () => {
                 </summary>
                 <ul>
                   <li>
-                    <button onClick={() => router.push('/enrollment/new')} className={btnClass}>
+                    <button onClick={() => router.push('/registration/new')} className={btnClass}>
                       New Student
                     </button>
                   </li>
