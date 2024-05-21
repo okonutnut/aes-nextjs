@@ -4,7 +4,7 @@ export const EditProfileAtom = atom(false);
 export const LoadingScreenAtom = atom(false); 
 
 // User Session
-export const sessionUser = atom({});
+export const sessionUser = atom(null);
 
 // Register & Enrollment Phase
 export const EnrollmentPhasesAtom = atom("registration");

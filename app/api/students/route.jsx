@@ -1,5 +1,6 @@
 import connectDB from "@/libs/mongodb";
 import Student from "@/model/student.model";
+import { HttpStatusCode } from "axios";
 import { NextResponse } from "next/server";
 
 // Create
@@ -22,7 +23,7 @@ export async function POST(request) {
         father_name, father_contact,
         mother_name, mother_contact
       }
-    ) ? { status: "Success" } : { status: "Failed" }
+    ) ? { status: HttpStatusCode.Created } : { status: HttpStatusCode.BadRequest }
   );
 }
 

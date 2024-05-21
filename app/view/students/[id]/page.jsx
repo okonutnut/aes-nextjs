@@ -1,13 +1,13 @@
 'use client'
-import {useState} from "react"
+import { useState } from "react"
 import { MdEdit, MdDelete, MdDone, MdCancel } from "react-icons/md"
 import StudentProfileForm from "./form"
-import { useAtom } from "jotai"
-import { EditProfileAtom } from "@/libs/atom"
 
 const StudentProfilePage = ({ params }) => {
-	const [editProfile, setEditProfile] = useAtom(EditProfileAtom)
+	const [editProfile, setEditProfile] = useState(false);
+
 	const [studentID, setStudentID] = useState(params.id);
+
 	function EditProfileToggle() {
 		const value = editProfile === true ? false : true
 		setEditProfile(value)
@@ -39,7 +39,7 @@ const StudentProfilePage = ({ params }) => {
 						}
 				</div>
 
-				<StudentProfileForm id={studentID} />
+				<StudentProfileForm id={studentID} editProfile={editProfile} />
 			</section>
 		</>
 	)

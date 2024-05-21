@@ -1,6 +1,6 @@
 'use client';
-import { useRouter } from "next/navigation";
-import { MdDashboard, MdDns, MdEditNote, MdInfo, MdManageAccounts, MdSummarize, MdViewList } from "react-icons/md";
+import { useRouter } from 'next/navigation';
+import { MdDashboard, MdDns, MdEditNote, MdInfo, MdManageAccounts, MdViewList } from "react-icons/md";
 const Sidebar = () => {
   const router = useRouter();
   const btnClass = "focus:bg-primary focus:text-base-100 py-2 p-3 leading-normal bg-inherit border-0 font-medium mb-1 text-[14px]";
@@ -17,13 +17,27 @@ const Sidebar = () => {
               </button>
             </li>
             <li>
-                <button onClick={()=> router.push('/data-entry')} className={btnClass}>
+              <details open>
+                <summary className="py-2 p-3 leading-normal font-medium text-[14px]">
                   <MdEditNote className="text-primary" />
-                  Data Entry
-                </button>
+                  Enrollment
+                </summary>
+                <ul>
+                  <li>
+                    <button onClick={() => router.push('/enrollment/new')} className={btnClass}>
+                      New Student
+                    </button>
+                  </li>
+                  {/* <li>
+                    <button onClick={() => router.push('/view/students')} className={btnClass} disabled>
+                      Old Student
+                    </button>
+                  </li> */}
+                </ul>
+              </details>
             </li>
             <li>
-              <details>
+              <details open>
                 <summary className="py-2 p-3 leading-normal font-medium text-[14px]">
                   <MdViewList className="text-error" />
                   View

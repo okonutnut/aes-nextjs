@@ -1,35 +1,37 @@
 "use client";
-import { useEffect } from "react";
 import { useForm } from "react-hook-form";
-import { useAtom } from "jotai";
-import { EnrollmentPhasesAtom, StudentRegistrationInfoAtom } from "@/libs/atom";
 import { FormInput } from "@/components/inputs/FormInput";
 import { FormSelect } from "@/components/inputs/FormSelect";
+import axios from "axios";
 
 const RegistrationForm = () => {
-  const [studentRegistrationInfo, setStudentRegistrationInfo] = useAtom(
-    StudentRegistrationInfoAtom
-  );
-  const [enrollmentPhases, setEnrollmentPhases] = useAtom(EnrollmentPhasesAtom);
-  const { register, handleSubmit } = useForm();
-
-  useEffect(() => {
-    setStudentRegistrationInfo(null);
-  }, []);
-  console.log("Student Info: ", studentRegistrationInfo);
+  const { register, handleSubmit, reset } = useForm();
 
   const GenderOptions = [
     { value: "Male", label: "Male" },
     { value: "Female", label: "Female" },
   ];
 
-  const onSubmit = (data) => {
-    setStudentRegistrationInfo(JSON.stringify(data));
-    setEnrollmentPhases("enrollment");
+  const onSubmit = async (data) => {
+    await axios.post(`/api/students`, JSON.stringify(data))
+      .then(response => {
+        console.log(response);
+        if(response.data.status === 201){
+          reset();
+          alert("Student successfully registered!");
+        } else {
+          alert("Failed to register student!");
+        }
+      })
+      .catch(error => {
+        console.log(error);
+      })
   };
+
 
   return (
     <>
+      <h1 className="text-[24px] font-bold">New Student Registration Form</h1>
       <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col">
         <div className="my-3">
           <h3 className="text-[18px] font-semibold">

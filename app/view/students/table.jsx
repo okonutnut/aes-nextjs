@@ -29,7 +29,7 @@ const StudentsTable = () => {
         
       </div>
       <div className="overflow-x-auto border rounded-md my-3">
-        <table className="table">
+        <table className="table table-sm">
           {/* head */}
           <thead>
             <tr className='text-[14px] font-semibold'>
