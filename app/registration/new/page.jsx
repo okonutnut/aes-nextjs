@@ -3,8 +3,10 @@ import { useForm } from "react-hook-form";
 import { FormInput } from "@/components/inputs/FormInput";
 import { FormSelect } from "@/components/inputs/FormSelect";
 import axios from "axios";
+import {useRouter} from "next/navigation";
 
 const RegistrationForm = () => {
+  const router = useRouter();
   const { register, handleSubmit, reset } = useForm();
 
   const GenderOptions = [
@@ -19,6 +21,7 @@ const RegistrationForm = () => {
         if(response.data.status === 201){
           reset();
           alert("Student successfully registered!");
+          router.push('/registration/old');
         } else {
           alert("Failed to register student!");
         }
@@ -52,15 +55,15 @@ const RegistrationForm = () => {
             />
             <FormInput
               register={register}
-              name="middle_name"
-              type="text"
-              label="Middle Name"
-            />
-            <FormInput
-              register={register}
               name="first_name"
               type="text"
               label="First Name"
+            />
+            <FormInput
+              register={register}
+              name="middle_name"
+              type="text"
+              label="Middle Name"
             />
           </div>
           <div className="flex justify-between gap-3 w-full">
@@ -89,7 +92,12 @@ const RegistrationForm = () => {
         <div className="my-3">
           <h3 className="text-[18px] font-semibold">Address & Contact</h3>
           <div className="flex justify-start gap-3 w-full">
-            <FormInput register={register} name="purok" type="text" label="Purok" />
+            <FormInput
+              register={register}
+              name="purok"
+              type="text"
+              label="Purok"
+            />
             <FormInput
               register={register}
               name="barangay"
