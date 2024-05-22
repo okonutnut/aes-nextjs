@@ -49,3 +49,36 @@ export async function GET(request) {
     }
   ]));
 }
+
+export async function PUT(request) {
+  const {
+    student_id, first_name, middle_name, last_name,
+    lrn, birthday, gender,
+    purok, barangay, municipality, province, zip_code,
+    father_name, father_contact,
+    mother_name, mother_contact
+  } = await request.json();
+
+  await connectDB();
+  const updated = await Student.findOneAndUpdate(
+                        {student_id},
+                        {
+                          first_name, middle_name, last_name,
+                          lrn, birthday, gender,
+                          purok, barangay, municipality, province, zip_code,
+                          father_name, father_contact,
+                          mother_name, mother_contact
+                        }, {new : true})
+  return NextResponse.json(
+    updated ? { status: HttpStatusCode.Ok } : { status: HttpStatusCode.BadRequest }
+  );
+}
+
+export async function DELETE(request) {
+  const {student_id} = await request.json();
+  await connectDB();
+  const deleted = await Student.findOneAndDelete({student_id}, {new : true})
+  return NextResponse.json(
+    deleted ? { status: HttpStatusCode.Ok } : { status: HttpStatusCode.BadRequest }
+  );
+}

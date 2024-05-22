@@ -92,7 +92,7 @@ const RegistrationForm = () => {
             <FormInput register={register} name="purok" type="text" label="Purok" />
             <FormInput
               register={register}
-              name="brgy"
+              name="barangay"
               type="text"
               label="Barangay"
             />
@@ -110,7 +110,7 @@ const RegistrationForm = () => {
             />
             <FormInput
               register={register}
-              name="zipcode"
+              name="zip_code"
               type="text"
               label="Zip Code"
             />

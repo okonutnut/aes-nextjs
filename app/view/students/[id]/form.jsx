@@ -1,15 +1,25 @@
 'use client'
 import { useEffect, useState } from "react"
-import { useForm } from "react-hook-form"
 import LoadingScreen from "@/components/Loading/LoadingScreen"
-import { useFetchStudentData } from "@/components/hooks/StudentHooks"
+import axios from "axios"
 
-const StudentProfileForm = ({id, editProfile}) => {
-	const {register, handleSubmit, reset} = useForm();
+const StudentProfileForm = ({register, studentID, editProfile}) => {
+  const [isLoading, setIsLoading] = useState(false);
   const isEdit = editProfile;
 
-  
-  const [isLoading, setIsLoading] = useState(false);
+  const [studentData, setStudentData] = useState({});
+  useEffect(() => {
+    setIsLoading(true);
+    axios.post('/api/students/profile', {student_id: studentID})
+      .then(response => {
+        setStudentData(response.data.data);
+        setIsLoading(false);
+      })
+      .catch(error => {
+        console.log(error);
+        setIsLoading(false);
+      })
+  }, []);
 
   const GenderOptions = [
     { value: "Male", label: "Male" },
@@ -18,7 +28,7 @@ const StudentProfileForm = ({id, editProfile}) => {
 
 	return (
     <>
-      <form className="flex flex-col">
+      <section className="flex flex-col">
         {isLoading && <LoadingScreen />}
         <div className="my-3">
           <div className="flex justify-start gap-3 w-full">
@@ -28,6 +38,7 @@ const StudentProfileForm = ({id, editProfile}) => {
               type="text"
               label="Last Name"
               readOnly={!isEdit}
+              value={studentData.last_name}
             />
             <Input
               register={register}
@@ -35,6 +46,7 @@ const StudentProfileForm = ({id, editProfile}) => {
               type="text"
               label="Middle Name"
               readOnly={!isEdit}
+              value={studentData.middle_name}
             />
             <Input
               register={register}
@@ -42,6 +54,7 @@ const StudentProfileForm = ({id, editProfile}) => {
               type="text"
               label="First Name"
               readOnly={!isEdit}
+              value={studentData.first_name}
             />
           </div>
           <div className="flex justify-start gap-3 w-full">
@@ -51,6 +64,7 @@ const StudentProfileForm = ({id, editProfile}) => {
               type="date"
               label="Birthday"
               readOnly={!isEdit}
+              value={studentData.birthday}
             />
             <SelectCustom
               register={register}
@@ -70,13 +84,15 @@ const StudentProfileForm = ({id, editProfile}) => {
               type="text"
               label="Purok"
               readOnly={!isEdit}
+              value={studentData.purok}
             />
             <Input
               register={register}
-              name="brgy"
+              name="barangay"
               type="text"
               label="Barangay"
               readOnly={!isEdit}
+              value={studentData.barangay}
             />
             <Input
               register={register}
@@ -84,6 +100,7 @@ const StudentProfileForm = ({id, editProfile}) => {
               type="text"
               label="Municipality"
               readOnly={!isEdit}
+              value={studentData.municipality}
             />
           </div>
           <div className="flex justify-start gap-3 w-full">
@@ -93,13 +110,15 @@ const StudentProfileForm = ({id, editProfile}) => {
               type="text"
               label="Province"
               readOnly={!isEdit}
+              value={studentData.province}
             />
             <Input
               register={register}
-              name="zipcode"
+              name="zip_code"
               type="text"
               label="Zip Code"
               readOnly={!isEdit}
+              value={studentData.zip_code}
             />
           </div>
           <div className="flex justify-between gap-3 w-full">
@@ -109,6 +128,7 @@ const StudentProfileForm = ({id, editProfile}) => {
               type="text"
               label="Father's Name"
               readOnly={!isEdit}
+              value={studentData.father_name}
             />
             <Input
               register={register}
@@ -116,6 +136,7 @@ const StudentProfileForm = ({id, editProfile}) => {
               type="text"
               label="Father's Contact"
               readOnly={!isEdit}
+              value={studentData.father_contact}
             />
             <Input
               register={register}
@@ -123,6 +144,7 @@ const StudentProfileForm = ({id, editProfile}) => {
               type="text"
               label="Mother's Name"
               readOnly={!isEdit}
+              value={studentData.mother_name}
             />
             <Input
               register={register}
@@ -130,10 +152,11 @@ const StudentProfileForm = ({id, editProfile}) => {
               type="text"
               label="Mother's Contact"
               readOnly={!isEdit}
+              value={studentData.mother_contact}
             />
           </div>
         </div>
-      </form>
+      </section>
     </>
   );
 }

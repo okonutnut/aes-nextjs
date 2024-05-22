@@ -3,12 +3,12 @@ import Student from "@/model/student.model";
 import { HttpStatusCode } from "axios";
 import { NextResponse } from "next/server";
 
-export async function POST(params, request) {
-	const id = params.id;
+export async function POST(request) {
+	const {student_id} = await request.json();
 	await connectDB();
-	const data = await Student.findOne({ id })
+	const data = await Student.findOne({ student_id : student_id }, { _id: 0, __v: 0 })
 	return NextResponse.json(
-		await data ? 
+		data ? 
 		{
 			status: HttpStatusCode.Ok,
 			data: data,
