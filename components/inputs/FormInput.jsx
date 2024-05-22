@@ -1,4 +1,4 @@
-export function FormInput({ name, register, optional, ...props}) {
+export function FormInput({ name, register, optional, readOnly, value, ...props}) {
   return (
     <label className="text-[14px] form-control w-full max-w-xs text-xs my-1">
       <div className="label">
@@ -10,10 +10,12 @@ export function FormInput({ name, register, optional, ...props}) {
       <input
         {...register(name, {
           // required: optional ? false : true,
-          required: false,
+          required: true,
         })}
         name={name}
         type={props.type}
+        value={value}
+        readOnly={readOnly}
         placeholder="Type here"
         className="text-[14px] h-9 input input-bordered w-full max-w-xs"
       />

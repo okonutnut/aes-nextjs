@@ -3,14 +3,6 @@ import yearSection from "@/model/year_section.model";
 import { HttpStatusCode } from "axios";
 import { NextResponse } from "next/server";
 
-// This is the API route for year_section
-export async function GET(request) {
-  await connectDB();
-  return NextResponse.json(
-    await yearSection.find({}, { _id: 0, __v: 0, createdAt: 0, updatedAt: 0 })
-  );
-}
-
 export async function POST(request) {
   const { year_level, section_name, adviser, room, strand_name } = await request.json();
   await connectDB();
@@ -22,6 +14,6 @@ export async function POST(request) {
     room
   });
   return NextResponse.json(
-    post ? { status: HttpStatusCode.Created } : { status: "Failed" }
+    post ? { status: HttpStatusCode.Created } : { status: HttpStatusCode.BadRequest }
   );
 }

@@ -45,8 +45,8 @@ const EnrolleesPage = () => {
                 <tr key={enrollee.id} onClick={onRowClick} className="hover">
                   <td className="font-semibold">{index + 1}</td>
                   <td>{enrollee.student_id}</td>
-                  <td>{enrollee.last_name + ', ' + enrollee.first_name + ' ' + enrollee.middle_name.charAt(0) + '.'}</td>
-                  <td>{enrollee.year_level_section}</td>
+                  <td>{enrollee.student_name}</td>
+                  <td>{enrollee.year_level} - {enrollee.section_name}</td>
                   <td>{enrollee.createdAt}</td>
                 </tr>
               ))}

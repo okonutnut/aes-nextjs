@@ -3,74 +3,40 @@ import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { SimpleInput } from "@/components/inputs/SimpleInput";
 import StudentSearchBar from "./searchbar";
-import SubjectTable from "./table";
 import axios, { HttpStatusCode } from "axios";
+import YearLevelSelector from "./year_level";
+import SectionSelector from "./section";
+import { FormInput } from "@/components/inputs/FormInput";
 
 const EnrollmentForm = () => {
+  const [search, setSearch] = useState(null);
   const [selectedType, setSelectedType] = useState("JHS");
   const [selectedLevel, setSelectedLevel] = useState("7");
-
   const [sectionData, setSectionData] = useState([{}]);
-  const [strandData, setStrandData] = useState([{}]);
-  const [subjectData, setSubjectData] = useState([{}]);
 
   useEffect(() => {
-    axios.post('/api/sections', { year_level: selectedLevel })
-      .then(response => {
-        if (response.data.status === HttpStatusCode.Ok || response.data.data.length > 0) {
+    axios.post('/api/year_level/section', { year_level: selectedLevel })
+      .then((response) => {
+        if (response.status == HttpStatusCode.Ok) {
           setSectionData(response.data.data);
         } else {
-          setSectionData([]);
+          setSectionData([{}]);
         }
       })
-  }, [selectedLevel, selectedType]);
-
-  useEffect(() => {
-    axios.post('/api/subjects/getall', { year_level: selectedLevel })
-      .then(response => {
-        if (response.data.status === HttpStatusCode.Ok || response.data.data.length > 0) {
-          setSubjectData(response.data.data);
-        } else {
-          setSubjectData([]);
-        }
-      })
-  }, [selectedLevel, selectedType]);
-
-  useEffect(() => {
-    axios.post('/api/sections/strand', { year_level: selectedLevel })
-      .then(response => {
-        if (response.data.status === HttpStatusCode.Ok || response.data.data.length > 0) {
-          setStrandData(response.data.data);
-        } else {
-          setStrandData([]);
-        }
-      })
-  }, [selectedLevel, selectedType]);
-
-  const type = [
-    { value: "JHS", name: "Junior High School" },
-    { value: "SHS", name: "Senior High School" },
-  ]
-  const jhs_level = [
-    { value: "7", name: "Grade 7" },
-    { value: "8", name: "Grade 8" },
-    { value: "9", name: "Grade 9" },
-    { value: "10", name: "Grade 10" },
-  ]
-
-  const shs_level = [
-    { value: "11", name: "Grade 11" },
-    { value: "12", name: "Grade 12" },
-  ]
-
-  const [search, setSearch] = useState(null);
+    }, [selectedLevel, selectedType])
 
   const { register, handleSubmit, reset } = useForm();
-  const onSubmit = (data) => {
-    setStudentRegistrationInfo(JSON.stringify(data));
-    setEnrollmentPhases("review");
-    console.log("Student Info: ", studentRegistrationInfo);
-  };
+  const onSubmit = async (data) => {
+    await axios.post('/api/enrollees', data)
+      .then(response => {
+        if (response.status == HttpStatusCode.Created) {
+          alert("Student has been enrolled successfully!");
+        } else {
+          alert("Failed to enroll student!");
+        }
+      })
+    reset();
+  }
 
   return (
     <>
@@ -81,17 +47,21 @@ const EnrollmentForm = () => {
             <StudentSearchBar setSearch={setSearch} />
           </div>
           <div className="flex justify-start gap-3 w-full">
-            <SimpleInput
+            <FormInput
               label="Student ID"
               type="text"
               readOnly
               value={search == null ? "" : JSON.parse(search).student_id}
+              register={register}
+              name="student_id"
             />
-            <SimpleInput
+            <FormInput
               label="Student Name"
               type="text"
               readOnly
               value={search == null ? "" : JSON.parse(search).first_name + " " + JSON.parse(search).middle_name + " " + JSON.parse(search).last_name}
+              register={register}
+              name="student_name"
             />
             <label className="form-control w-full max-w-xs my-1">
               <div className="label">
@@ -104,74 +74,10 @@ const EnrollmentForm = () => {
             </label>
           </div>
           <div className="flex justify-start gap-3 w-full mb-4">
-            <label className="form-control w-full max-w-xs my-1">
-              <div className="label">
-                <span className="label-text text-xs">Year Level</span>
-              </div>
-              <select className="select select-sm select-bordered w-full max-w-xs" {...register('year_level', { required: true })} onChange={(e) => setSelectedLevel(e.target.value)}>
-                {selectedType == "JHS" ? jhs_level.map((level, index) => (
-                  <option key={index} value={level.value}>{level.name}</option>
-                )) : shs_level.map((level, index) => (
-                  <option key={index} value={level.value}>{level.name}</option>
-                ))}
-              </select>
-            </label>
+            <YearLevelSelector register={register} setSelectedLevel={setSelectedLevel} selectedType={selectedType} />
             {selectedType == "JHS" && (
-              <>
-                <label className="form-control w-full max-w-xs my-1">
-                  <div className="label">
-                    <span className="label-text text-xs">Section</span>
-                  </div>
-                  <select className="select select-sm select-bordered w-full max-w-xs" {...register('section_name', { required: true })} >
-                    {sectionData.map((section, index) => (
-                      <option key={index} value={section.section_name}>{section.section_name}</option>
-                    ))}
-                  </select>
-                </label>
-                <SimpleInput
-                  label="Class Adviser"
-                  type="text"
-                  readOnly
-                  value={sectionData.map((section) => section.adviser)}
-                />
-                <SimpleInput
-                  label="Room Assignment"
-                  type="text"
-                  readOnly
-                  value={sectionData.map((section) => section.room)}
-                />
-              </>
+              <SectionSelector register={register} selectedLevel={selectedLevel} sectionData={sectionData} />
             )}
-            {selectedType == "SHS" && (
-              <>
-                <label className="form-control w-full max-w-xs my-1">
-                  <div className="label">
-                    <span className="label-text text-xs">Academic Track</span>
-                  </div>
-                  <select className="select select-sm select-bordered w-full max-w-xs" {...register('track_name', { required: true })} >
-                    {strandData.map((strand, index) => (
-                      <option key={index} value={strand.strand_name}>{strand.strand_name}</option>
-                    ))}
-                  </select>
-                </label>
-                <SimpleInput
-                  label="Class Adviser"
-                  type="text"
-                  readOnly
-                  value={strandData.map((strand) => strand.adviser)}
-                />
-                <SimpleInput
-                  label="Room Assignment"
-                  type="text"
-                  readOnly
-                  value={strandData.map((strand) => strand.room)}
-                />
-              </>
-            )}
-          </div>
-          <div className="flex flex-col justify-start gap-3 w-full">
-            <h3 className="text-xs">Subjects</h3>
-            <SubjectTable subjects={subjectData} />
           </div>
         </div>
         <div className="flex justify-end my-5 gap-4">

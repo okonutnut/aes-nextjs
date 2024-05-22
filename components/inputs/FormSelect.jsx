@@ -8,7 +8,7 @@ export function FormSelect({ name, register, ...props}) {
       <select
         name={name}
         {...register(name, {
-          required: false,
+          required: true,
         })}
         className="text-[14px] h-9 select select-sm select-bordered w-full max-w-xs">
         {options.map((option) => (

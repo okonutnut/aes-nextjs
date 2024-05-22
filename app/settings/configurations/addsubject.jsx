@@ -8,8 +8,8 @@ import axios from "axios";
 const AddSubject = () => {
   const [selectValue, setSelectValue] = useState("JHS");
   const [selectYear, setSelectYear] = useState("7");
-  console.log(selectValue);
-  console.log(selectYear);
+  // console.log(selectValue);
+  // console.log(selectYear);
 
   const jhs_level = [{
     value: 7,
@@ -68,7 +68,6 @@ const AddSubject = () => {
             {selectValue == "SHS" && (
               <>
                 <FormInput register={register} name='strand' label='Strand' type='text' />
-                <FormInput register={register} name='track' label='Track' type='text' />
               </>
             )}
             <FormInput register={register} name='code' label='Subject Code' type='text' />

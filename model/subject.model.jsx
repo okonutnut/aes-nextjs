@@ -10,7 +10,6 @@ const SubjectSchema = new Schema({
   "name": String,
   "year_level": String,
   "strand": String,
-  "track": String,
   "type": String,
 }, { timestamps: true });
 
