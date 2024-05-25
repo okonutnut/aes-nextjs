@@ -5,6 +5,7 @@ import ViewContent from "@/components/container/ViewContent";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
+  icon: "/logo.png",
   title: "NVGHS - AES",
   description: "Reasearch Method Project by Franco, Cabalse and Soriano",
 };
